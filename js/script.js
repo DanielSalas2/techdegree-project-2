@@ -1,17 +1,19 @@
 
 const listNum = document.getElementsByTagName('li');
-
 let page = 1;
 
+//shows the page based on the number
 const showPage = (list, page) => {
     const listUp = (page * 10);
     const listDown = listUp - 10;
     list = list.length;
 
-    for (let i = 0; i < list; i++)
+
+    for (let i = 0; i < list; i++)//loop hides the student list at strt
     {
       document.getElementsByTagName("li")[i].style.display = 'none';
-        for (let i = listDown; i < listUp; i++)
+
+        for (let i = listDown; i < listUp; i++) //loop shows the 10 students based on page number
         {
           document.getElementsByTagName("li")[i].style.display = "";
         }
@@ -33,18 +35,17 @@ const appendPageLinks = (list) => {
 
   //for loop to create the buttons
   for (i=1;i<=pageNum;i +=1){
-  pages += 1;
-    const li = document.createElement('li');
-     ul.appendChild(li);
+    pages += 1;
 
+    const li = document.createElement('li');
+    ul.appendChild(li);
     const a = document.createElement('a');
     a.textContent = pages;
     li.appendChild(a);
+    a.href = '#';
+    const startPage = document.querySelector('a').className = 'active';
 
-     a.href = '#';
-
-     const startPage = document.querySelector('a').className = 'active';
-
+//Added the event listner to pass to showPage
   a.addEventListener('click', (e) => {
     selectedLink = e.target.textContent;
     let link = document.querySelector('.active').className = '';
@@ -52,12 +53,11 @@ const appendPageLinks = (list) => {
     page = selectedLink;
     showPage(passList, page);
     console.log(passList, page);
-
     e.target.className = 'active';
 
   });
 }
 }
-
+//calling the functions to make the page work
 showPage(listNum,page);
 appendPageLinks(listNum.length);
