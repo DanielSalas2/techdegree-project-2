@@ -1,6 +1,7 @@
 
 const listNum = document.getElementsByTagName('li');
-const page = 1;
+
+let page = 1;
 
 const showPage = (list, page) => {
     const listUp = (page * 10);
@@ -20,35 +21,43 @@ const showPage = (list, page) => {
 
 
 const appendPageLinks = (list) => {
+
   const pageNum =  Math.ceil(listNum.length/10);
   const paginationDiv = document.createElement('div'); //assigns and creates the div element
-  const page = document.querySelector('.page'); // assigns the page to a variable
+  const divpage = document.querySelector('.page'); // assigns the page to a variable
   paginationDiv.className = 'pagination'; // assigns the pagination class
   const ul = document.createElement('ul'); // assigns and creates the ul tah
-  page.appendChild(paginationDiv); // page appends with the paginationDiv
+  divpage.appendChild(paginationDiv); // page appends with the paginationDiv
   paginationDiv.appendChild(ul); // paginationDiv appends the ul
+  let pages = 0;
 
   //for loop to create the buttons
-  for(let i = 1; i < list+1; i++) // added a 1 to make the link numbers correct;
-  {
+  for (i=1;i<=pageNum;i +=1){
+  pages += 1;
     const li = document.createElement('li');
-    const a = document.createElement('a');
-     a.href = '#';
-     a.textContent = i;
-     li.appendChild(a);
      ul.appendChild(li);
-  }
-  a.addEventListner('click', (e) => {
+
+    const a = document.createElement('a');
+    a.textContent = pages;
+    li.appendChild(a);
+
+     a.href = '#';
+
+     const startPage = document.querySelector('a').className = 'active';
+
+  a.addEventListener('click', (e) => {
     selectedLink = e.target.textContent;
-    let links = document.querySelector('active').className = '';
+    let link = document.querySelector('.active').className = '';
+    passList = document.querySelectorAll('.student-details');
     page = selectedLink;
-    showPage(passlist, page);
-    console.log(passlist, page);
+    showPage(passList, page);
+    console.log(passList, page);
 
     e.target.className = 'active';
 
-  })
+  });
+}
 }
 
 showPage(listNum,page);
-appendPageLinks(pageNum);
+appendPageLinks(listNum.length);
